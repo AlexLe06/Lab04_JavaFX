@@ -5,11 +5,13 @@
 package lab04;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -101,6 +103,64 @@ public class Lab04 extends Application {
         hbox1.getChildren().add(calculate);
         hbox1.getChildren().add(clear);
         grid.add(hbox1, 0, 9);
+        
+        
+        Label totalExpenses = new Label("");
+        Label allowableExpenses = new Label("");
+        Label excessExpenses = new Label("");
+        Label savedExpenses = new Label("");
+        
+        calculate.setOnAction(e -> {
+            double total = Integer.parseInt(airfareBox.getText()) 
+                    + Integer.parseInt(carRentalBox.getText())
+                    + (0.27 * Integer.parseInt(milesDrivenBox.getText()))
+                    + Integer.parseInt(parkingFeesBox.getText())
+                    + Integer.parseInt(taxiChargeBox.getText())
+                    + Integer.parseInt(seminarRegistrationFeesBox.getText())
+                    + Integer.parseInt(lodgingChargesBox.getText());
+            
+            double allowable = (37 + 10 + 20 + 95) * Integer.parseInt(daysBox.getText())
+                    + (0.27 * Integer.parseInt(milesDrivenBox.getText()));
+            
+            double savedAmount = allowable - total;
+            double excess = total - allowable;
+            
+            if (savedAmount < 0) {
+                savedExpenses.setText("Saved Expenses: 0.00$");
+                excessExpenses.setText("Excess Expenses: " + excess + '$');
+            } else { 
+                savedExpenses.setText("Saved Expenses: " + savedAmount + '$');
+                excessExpenses.setText("Excess Expenses: 0.00$");
+            }
+            
+            if (excess <= 0) {
+                savedExpenses.setText("Saved Expenses: " + savedAmount + '$');
+                excessExpenses.setText("Excess Expenses: 0.00$");
+            } else {
+                savedExpenses.setText("Saved Expenses: 0.00$");
+                excessExpenses.setText("Excess Expenses: " + excess + '$');
+            }
+                    
+            totalExpenses.setText("Total Expense: " + total + '$');
+            allowableExpenses.setText("Allowable Expenses: " + allowable  + '$');
+        });
+        
+        grid.add(totalExpenses, 0 , 10);
+        grid.add(allowableExpenses, 0 , 11);
+        grid.add(excessExpenses, 0 , 12);
+        grid.add(savedExpenses, 0 , 13);
+        
+//        EventHandler<KeyEvent> handler = event -> {
+//            boolean filled = !carRentalBox.getText().trim().isEmpty();
+//            milesDrivenBox.setDisable(filled);
+//        };
+//        carRentalBox.setOnKeyReleased(handler);
+//        
+//        EventHandler<KeyEvent> handler2 = event -> {
+//            boolean filled = !milesDrivenBox.getText().trim().isEmpty();
+//            carRentalBox.setDisable(filled);
+//        };
+//        milesDrivenBox.setOnKeyReleased(handler2);
         
         scene.getStylesheets().add("mystyle.css");
         primaryStage.setScene(scene);

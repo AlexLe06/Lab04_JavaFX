@@ -6,5 +6,11 @@
 .label {
     -fx-text-fill: white;
     -fx-font-weight: bold; 
-    -fx-font-size: 12pt;
+    -fx-font-size: 11pt;
+}
+
+.button {
+    -fx-background-color: #F7EEB7;
+    -fx-text-fill: #8C1D3F;
+    -fx-font-weight: bold; 
 }
