@@ -150,18 +150,6 @@ public class Lab04 extends Application {
         grid.add(excessExpenses, 0 , 12);
         grid.add(savedExpenses, 0 , 13);
         
-//        EventHandler<KeyEvent> handler = event -> {
-//            boolean filled = !carRentalBox.getText().trim().isEmpty();
-//            milesDrivenBox.setDisable(filled);
-//        };
-//        carRentalBox.setOnKeyReleased(handler);
-//        
-//        EventHandler<KeyEvent> handler2 = event -> {
-//            boolean filled = !milesDrivenBox.getText().trim().isEmpty();
-//            carRentalBox.setDisable(filled);
-//        };
-//        milesDrivenBox.setOnKeyReleased(handler2);
-        
         scene.getStylesheets().add("mystyle.css");
         primaryStage.setScene(scene);
         primaryStage.show();
